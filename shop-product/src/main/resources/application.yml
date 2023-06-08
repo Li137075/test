@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    discovery-client-enabled: false #这里是让nacos把他当成一个URLC，而不是当作服务名
+  sleuth:
+    sampler:
+      probability: 1.0 #采用的百分比 这里是测试 所示设置为百分之百  也就是所有的链路都会采样到
+  application:
+    name: service-product
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=UTC&useUnicode=true&characterEncodintg=utf-8&useSSL=false
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  serverTimezone=UTC&useUnicode=true&characterEncodintg=utf-8&useSSL=false

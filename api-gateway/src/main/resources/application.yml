@@ -1,0 +1,46 @@
+server:
+  port: 7000
+
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    discovery-client-enabled: false #这里是让nacos把他当成一个URLC，而不是当作服务名
+  sleuth:
+    sampler:
+      probability: 1.0 #采用的百分比 这里是测试 所示设置为百分之百  也就是所有的链路都会采样到
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #将gateway注册到nacos中
+    gateway:
+      discovery:
+        locator:
+          enabled: true #让gateway从nacos中获取服务信息  也就是开启这个nacos服务发现的权限
+
+      # 在这里进行配置路由数组 [路由就是指当满足什么样的条件的时候转发到那个微服务上]
+      routes:
+        - id: product_route #当前路由转发的标识 这里要求唯一 默认是UUID  product_route是自己定义的id 通过在后面加一个route保证id的唯一
+#          uri: http://localhost:8081 #请求最终要被转发到的地址  这里是指的是转发的服务器ip和端口号
+          #lb指的是LoadBalancer 这是一个全局过滤器 指的是负载均衡
+          uri: lb://service-product #lb指的是负载均衡，后面跟的是具体微服务的标识
+          order: 1 #路由的优先级，数字越小代表路由的优先级越高
+          predicates: #断言（条件判断，返回值是boolean  转发请求要求满足的条件  指的是请求路径满足什么样的格式才转发到上面指定的uri）  注意这里也是一个数组
+#           这里的path只是断言中其中的一个参数  断言中有9个参数呢 能够满足大部分的需求  也可以自定义断言判断
+            - Path=/product-serv/** #当请求路径满足Path指定的规则时，此路由信息才会正常转发   这里是指的是服务转发的url路由 和上面的ip和端口号凑成一个完整的路由
+#            - Age=18,60 # 限制age只有再18岁到60岁之间的人才能访问  注意这里的Age要和自定义断言类中的名称一样 这里的这个断言是自己自定义的断言
+          filters: #过滤器（在请求传递过程中  对请求做的一些手脚）
+#            这里也可以自定义过滤规则
+            - StripPrefix=1 #在请求转发之前去掉一层路径
+#            - Log=true,false # 控制日志是否开启 这里的这个过滤器也是自己定义的过滤器
+        - id: order_route
+          uri: lb://service-order
+          order: 1
+          predicates:
+            - Path=/order-serv/**
+          filters:
+            - StripPrefix=1
+
+#对路由的处理 是先进行断言的判断 然后再进行过滤器的判断
+#原先的路径为 http://localhost:8081/product-serv/product/1     现在去掉一层路径后变成了http://localhost:8081/product/1
