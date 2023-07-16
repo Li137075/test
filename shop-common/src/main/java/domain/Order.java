@@ -14,7 +14,7 @@ public class Order {
 //    和商品相关的三个属性
     private Integer pid;//商品id
     private String pname;//商品名称
-    private Double pprice;//商品单价
+    private Integer pprice;//商品单价
 
 //   数量
     private Integer number;//购买数量

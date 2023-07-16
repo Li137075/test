@@ -4,7 +4,7 @@ server:
     max-threads: 10
 spring:
   zipkin:
-    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    base-url: http://192.168.10.20:9411/ #zipkin server的请求地址
     discovery-client-enabled: false #这里是让nacos把他当成一个URLC，而不是当作服务名
   sleuth:
     sampler:
@@ -19,7 +19,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 192.168.10.20:8848
     sentinel:
       transport:
         # 这里是指定跟控制台交流的端口（用于和sentinel控制台的交流 这里随意指定一个未使用的端口即可）
@@ -47,6 +47,6 @@ feign:
 
 #配置rocketmq
 rocketmq:
-  name-server: 43.142.92.196:9876   #rocketMQ服务的地址
+  name-server: 166.111.139.147:9876   #rocketMQ服务的地址
   producer:
     group: shop-order   #生产组

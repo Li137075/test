@@ -20,7 +20,7 @@ public class RocketMQReceiveMessageTest {
         DefaultMQPushConsumer consumer=new DefaultMQPushConsumer("myconsumer-group");
 
         //2 为消费者设置NameServer的地址
-        consumer.setNamesrvAddr("43.142.92.196:9876");
+        consumer.setNamesrvAddr("66.111.139.147:9876");
 
         //3 指定消费者订阅的主题和标签
         consumer.subscribe("myTopic", "*");

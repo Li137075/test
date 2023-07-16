@@ -3,7 +3,7 @@ server:
 
 spring:
   zipkin:
-    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    base-url: http://192.168.10.20:9411/ #zipkin server的请求地址
     discovery-client-enabled: false #这里是让nacos把他当成一个URLC，而不是当作服务名
   sleuth:
     sampler:
@@ -13,7 +13,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 #将gateway注册到nacos中
+        server-addr: 192.168.10.20:8848 #将gateway注册到nacos中
     gateway:
       discovery:
         locator:

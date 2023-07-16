@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 //这个代码是用来测试seta组件的
 @Slf4j
-@Service
-public class OrderServiceImpl3{
+//@Service
+public class OrderServiceImpl3 implements OrderService{
     @Autowired
     private OrderMapper orderMapper;
 
@@ -28,9 +28,6 @@ public class OrderServiceImpl3{
 
     public Order createrOrder(Integer pid) {
         Product product=productService.findByPid(pid);
-
-
-
 
         log.info("接收到{}号商品的下单请求，接下来调用商品微服务查询此商品信息",pid);
 
@@ -61,5 +58,15 @@ public class OrderServiceImpl3{
         rocketMQTemplate.convertAndSend("order-topic",order);
 
         return order;
+    }
+
+    @Override
+    public void deleteOrder(Integer oid) {
+        orderMapper.deleteOrder(oid);
+    }
+
+    @Override
+    public void createrOrder(Order order) {
+        orderMapper.createrOrder(order);
     }
 }

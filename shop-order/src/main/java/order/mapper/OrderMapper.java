@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface OrderMapper{
 
     void createrOrder(Order order);
+
+    void deleteOrder(Integer oid);
 }

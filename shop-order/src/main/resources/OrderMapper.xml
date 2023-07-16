@@ -18,4 +18,10 @@
         values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER},
         #{pname,jdbcType=CHAR}, #{pprice,jdbcType=INTEGER}, #{number,jdbcType=INTEGER})
     </insert>
+
+    <delete id="deleteOrder" parameterType="java.lang.Integer">
+        delete from shop_order where oid=#{oid}
+    </delete>
+
+
 </mapper>

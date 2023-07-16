@@ -34,7 +34,6 @@ public class OrderController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
-
     //下面这个注入的是加了feign的一个接口 能够达到访问远程服务 就像是访问本地方法一样的效果
     @Autowired
     private ProductService productService;
@@ -153,7 +152,6 @@ public class OrderController {
 
 
     }
-
 
     //测试该微服务下的高并发场景  我们通过使用jmeter模拟了很多次的请求  请求的路径是上面那个方法 有可能就会导致下面的这个message方法访问不到  这就是高并发的缺点
     @RequestMapping("/order/message")

@@ -16,7 +16,7 @@ public class RocketMQSendMessageTest {
         DefaultMQProducer producer = new DefaultMQProducer("myproducer-group");
 
         //2.为生产者设置NameServer的地址
-        producer.setNamesrvAddr("43.142.92.196:9876");
+        producer.setNamesrvAddr("166.111.139.147:9876");
 
         //3.启动生产者
         producer.start();

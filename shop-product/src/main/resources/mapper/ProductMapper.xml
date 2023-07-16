@@ -21,8 +21,24 @@
     </resultMap>
 
 
-    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="findByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         <!--要执行的 sql 语句-->
         select pid,pname,pprice,stock from shop_product where pid=#{pid}
     </select>
+
+    <insert id="insert" parameterType="domain.Product">
+        insert into shop_product(pid,pname,pprice,stock) values(#{pid},#{pname},#{pprice},#{stock})
+    </insert>
+
+    <update id="update" parameterType="domain.Product">
+        update shop_product set pname=#{pname},pprice=#{pprice},stock=#{stock} where pid=#{pid}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from shop_product where pid=#{pid}
+    </delete>
+
+    <update id="update_stock">
+        update shop_product set stock=#{stock} where pid=#{id}
+    </update>
 </mapper>

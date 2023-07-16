@@ -12,6 +12,6 @@ public class User {
 
     private Integer uid; //主键
     private String username;//用户名
-    private String password;//密码
-    private String telephone;//手机号
+    private Integer deposit;//存款
+    private Integer spend;//消费金额
 }
