@@ -1,0 +1,27 @@
+server:
+  port: 7053
+spring:
+  profiles:
+    active: development
+  redis:
+    host: 166.111.139.147
+    port: 6379
+    database: 0
+    timeout: 10000
+# 设置lettuce参数
+    lettuce:
+      pool:
+# 最大连接数，这里默认的是8
+        max-active: 20
+# 最大阻塞等待时间（使用负值表示没有限制） 默认为-1
+        max-wait: -1
+# 最大空闲连接 默认为8
+        max-idle: 8
+        min-idle: 0
+  # 最小空闲连接 默认为0
+  application:
+    name: server-redis
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.20:8848
